@@ -1,0 +1,66 @@
+//cycle detection in undirected graph
+
+#include<bits/stdc++.h>
+using namespace std;
+#define N 10000
+stack<int>s;
+
+bool iscycle(int src,vector<vector<int>>&g,vector<bool>&vis,int parent){
+    
+    vis[src]=true;
+
+    for(auto e: g[src]){
+        if(e != parent)
+        {
+           
+            if(vis[e])
+                return true;
+        
+        else if(!vis[e] && iscycle(e,g,vis,src))
+        {
+            return true;
+        }
+        }
+    }
+    
+    
+    
+    return false;
+    
+    
+    
+   
+}
+
+int main(){
+    
+    int v,e;
+    cin>>v>>e;
+    vector<vector<int>>g(N);
+    
+    for(int i=0;i<e;i++){
+        int a,b;
+        cin>>a>>b;
+        g[a].push_back(b);
+        g[b].push_back(a);
+    }
+    
+    bool cycle = false;
+    vector<bool>vis(N,false);
+    
+    for(int i=0;i<N;i++){
+        if(!vis[i] && iscycle(i,g,vis,-1)){
+            cycle = true;
+        }
+        
+    }
+    
+    if(cycle) cout<<"cycle is present ";
+    else
+        cout<<"cycle is not present";  
+    
+    if(cycle && !s.empty())
+    {
+        cout<<s.top()<<"->";
+    }
+}

@@ -1,0 +1,30 @@
+//reversing string using predefined stack
+
+#include <bits/stdc++.h>
+
+
+using namespace std;
+
+void reverse(char *str,int n){
+    
+    stack<char> obj;       //stack from standard template library (STL)
+    for(int i=0;i<n;i++){
+        
+        obj.push(str[i]);
+    }
+    
+    for(int i=0;i<n;i++){
+       str[i]=obj.top() ;
+       obj.pop();
+    }
+}
+int main() {
+    
+    char str[50];
+    printf("Enter a string: ");
+    scanf("%[^\n]",str);
+    reverse(str,strlen(str));
+    printf("%s",str);
+    return 0;
+}
+
